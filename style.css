@@ -1,0 +1,237 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.form-container, .chat-container {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+#resultadoCita {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 6px;
+}
+
+.loading {
+    color: #3498db;
+    font-style: italic;
+}
+
+.success {
+    background-color: #e8f8f5;
+    border-left: 4px solid #2ecc71;
+    color: #27ae60;
+}
+
+.error {
+    background-color: #fdecea;
+    border-left: 4px solid #e74c3c;
+    color: #c0392b;
+}
+
+/* Chat styles */
+#chatMessages {
+    height: 400px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 6px;
+}
+
+.chat-input {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input input {
+    flex-grow: 1;
+}
+
+.user-msg {
+    text-align: right;
+    margin: 10px 0;
+    padding: 10px 15px;
+    background: #e3f2fd;
+    border-radius: 18px 18px 0 18px;
+    display: inline-block;
+    max-width: 80%;
+}
+
+.bot-msg {
+    text-align: left;
+    margin: 10px 0;
+    padding: 10px 15px;
+    background: #f1f1f1;
+    border-radius: 18px 18px 18px 0;
+    display: inline-block;
+    max-width: 80%;
+    white-space: pre-wrap;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .panel {
+        grid-template-columns: 1fr;
+    }
+}
+/* Estilos básicos para el formulario y el chat */
+.container {
+    width: 60%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.panel {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-container {
+    width: 48%;
+}
+
+.chat-container {
+    width: 48%;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#resultadoCita {
+    margin-top: 20px;
+}
+
+.loading {
+    color: blue;
+}
+
+.success {
+    color: green;
+}
+
+.error {
+    color: red;
+}
+
+.chat-input {
+    display: flex;
+    justify-content: space-between;
+}
+
+.chat-input input {
+    width: 80%;
+}
+
+.chat-input button {
+    width: 18%;
+}
+
+.chat-messages {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.user-msg {
+    text-align: left;
+}
+
+.bot-msg {
+    text-align: right;
+    color: blue;
+}
