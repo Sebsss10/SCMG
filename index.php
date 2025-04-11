@@ -28,7 +28,7 @@ $doctores = $pdo->query("SELECT id, nombre, especialidad FROM doctores WHERE act
 
                     <div class="form-group">
                         <label for="carnet">Carnet/N° Identificación (Opcional)</label>
-                        <input type="text" id="carnet" name="carnet" pattern="[0-9]{5,20}" title="Solo números (entre 5 y 20 caracteres)">
+                            <input type="text" id="carnet" name="carnet" pattern="[0-9]{5,20}" title="Solo números (entre 5 y 20 caracteres)">
                     </div>
 
                     <div class="form-group">
@@ -54,9 +54,12 @@ $doctores = $pdo->query("SELECT id, nombre, especialidad FROM doctores WHERE act
                     </div>
 
                     <button type="submit">Agendar Cita</button>
+                    
                     <div id="resultadoCita"></div>
                 </form>
+                
             </div>
+            
 
             <!-- Formulario de Reasignar Cita (Oculto inicialmente) -->
             <div id="formReasignar" class="form-container" style="display:none;">
@@ -76,13 +79,16 @@ $doctores = $pdo->query("SELECT id, nombre, especialidad FROM doctores WHERE act
                 </form>
             </div>
 
-            <!-- ASISTENTE VIRTUAL -->
-            <div class="chat-container">
-                <h2>Asistente Virtual</h2>
+           <!-- ASISTENTE VIRTUAL -->
+           <div class="chat-container">
+            <div class="chat-header" style="background:#075e54;color:white;padding:10px;text-align:center;font-weight:bold;">
+                    🩺 MediBot
+            </div>
+
                 <div id="chatMessages"></div>
                 <div class="chat-input">
-                    <input type="text" id="pregunta" placeholder="Pregunta sobre disponibilidad...">
-                    <button id="btnEnviar">Enviar</button>
+                <input type="text" id="pregunta" placeholder="Escribe tu mensaje...">
+                <button id="btnEnviar">➤</button>
                 </div>
             </div>
         </div>
@@ -221,41 +227,49 @@ $doctores = $pdo->query("SELECT id, nombre, especialidad FROM doctores WHERE act
             });
         }
 
-        // Manejo del Chatbot
-        const btnEnviar = document.getElementById('btnEnviar');
-        const preguntaInput = document.getElementById('pregunta');
-        const chatMessages = document.getElementById('chatMessages');
+       // Manejo del Chatbot
+const btnEnviar = document.getElementById('btnEnviar');
+const preguntaInput = document.getElementById('pregunta');
+const chatMessages = document.getElementById('chatMessages');
 
-        btnEnviar.addEventListener('click', async function() {
-            const pregunta = preguntaInput.value.trim();
+btnEnviar.addEventListener('click', async function() {
+    const pregunta = preguntaInput.value.trim();
 
-            if (pregunta) {
-                // Agregar pregunta al chat
-                chatMessages.innerHTML += ` 
-                    <div class="user-message">
-                        <strong>Tú:</strong> ${pregunta}
-                    </div>
-                `;
-                preguntaInput.value = '';
+    if (pregunta) {
+        // Agregar pregunta al chat
+        chatMessages.innerHTML += ` 
+            <div class="user-message">
+                <img src="img/usuario.jpg" alt="Usuario" class="avatar">
+                <div class="message-content">
+                    <strong>Tú:</strong>
+                    <div class="text">${pregunta}</div>
+                </div>
+            </div>
+        `;
+        preguntaInput.value = '';
 
-                // Obtener respuesta del chatbot
-                const response = await fetch('chatbot.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ pregunta })
-                });
-
-                const data = await response.json();
-
-                // Agregar respuesta del chatbot
-                chatMessages.innerHTML += ` 
-                    <div class="bot-message">
-                        <strong>MediBot:</strong> ${data.respuesta}
-                    </div>
-                `;
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
+        // Obtener respuesta del chatbot
+        const response = await fetch('chatbot.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ pregunta })
         });
+
+        const data = await response.json();
+
+        // Agregar respuesta del chatbot
+        chatMessages.innerHTML += ` 
+            <div class="bot-message">
+                <img src="img/medibot.jpg" alt="Bot" class="avatar">
+                <div class="message-content">
+                    <strong>MediBot:</strong>
+                    <div class="text">${data.respuesta}</div>
+                </div>
+            </div>
+        `;
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+});
 
         // Agregar funcionalidad para presionar Enter
         preguntaInput.addEventListener('keydown', function(e) {
@@ -265,6 +279,15 @@ $doctores = $pdo->query("SELECT id, nombre, especialidad FROM doctores WHERE act
             }
         });
     });
+
+
+    function scrollToBottom() {
+        const chatMessages = document.getElementById("chatMessages");
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Llamar esta función cada vez que se añade un nuevo mensaje
+    scrollToBottom();
     </script>
 </body>
 </html>
